@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+<style>
+
+    .dd{
+        width: 400px;
+        margin: 20px;
+        font-size: 25px;
+        padding: 5px;
+        
+    }
+    body{
+        background-color: black;
+    }
+</style>
+
+
+<center>
+
+    <div style="margin-top:100px;background-image:linear-gradient(to bottom,rgba(0,0,0.1),rgba(255,255,255,0.2));width:500px;" >
+
+
+        <h3 style="color: white;">movie bucket</h3>
+
+        <form method="POST" action="{% url 'bookings:user_login' %}">
+    
+            {% csrf_token %}
+        
+        <br>
+            <input type="text" class="dd" name="username" id="" placeholder="username" required>
+        <br>
+            <input type="password" class="dd" name="password" id="" placeholder="password" required>
+            <br>
+            <input type="submit"  class="dd" class="btn btn-success" name="" value="Login" id="" >
+        
+        </form>
+        
+    </div>
+    
+</center>
+{% endblock %}

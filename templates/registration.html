@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+
+<style>
+
+    input{
+       
+        width: 400px;
+        border-radius: 2px;
+        height: 40px;
+    }
+    p{
+        color: white;
+    }
+</style>
+
+
+
+<center>
+   <div style="margin:50px">
+    {% if registered %}
+    <h1>Thank you</h1>
+ 
+{% else %}
+
+<center>
+    <div>
+        <center><h1 style="color: white;">Sign up and grab your tickets now</h1></center>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{user_form.username}}<br>
+                {{user_form.password}} <br>
+                {{profile_pic_form.profilePic}}  <br>
+            
+            <button type="submit" class="btn btn-success" name="">Submit</button>
+            </form>
+    </div>
+        
+</center>
+{% endif %}
+   </div>
+</center>
+
+{% endblock %}

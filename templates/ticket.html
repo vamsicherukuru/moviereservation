@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+
+
+
+<center>
+    <div style="margin:50px">
+     
+     
+     <h1 style="color: white;">{{ ticket.seat }}
+      {{ticket.movie}}   
+     </h1>
+     
+     <br><br>
+
+
+     <div style="width: 550px; height:300px; background:white; 
+
+     
+     
+     
+     " id="content">
+
+
+     <div style="float: left; width:55px;background:#195e73; height:300px;
+     
+     margin-right:20px;
+     border-left: 2px solid #195e73; border-right: 2px solid #195e73;">
+
+        <h5 style=" color:white;  border-right: 7px dashed white;border-left: 7px dashed white; height:300px;">
+
+            M <br> O <br> V <br> I <br> E <br>
+            <br> T <br> I <br> C <br> K <br> E <br> T
+        </h5>
+
+
+     </div>
+     
+<div style="height: 40px ; width:550px; background:#d63122;"></div>
+<br>
+     <h5 style="font-family: Arial;"><b>{{ ticket.movie | upper }}</b>
+    
+    
+    </h5>
+    <br>
+   <div>
+    <img src="{% static 'images/qrcode.png' %}" width="100px;" style="float: right; margin-right:60px;" alt="">
+    <h5 style="color: #4d4d4d; text-align:left; margin-left:50px;">
+        SEAT : {{ ticket.seat | upper  }}
+    <br>TIME : {{ ticket.show_timing | upper }}
+    </h5>
+    
+   </div>
+    
+   <button onclick="download()">Download</button>
+        
+     </div>
+
+     
+
+
+
+    </center>
+
+    <script type="text/javascript">
+        function download() {
+            var a = document.body.appendChild(
+               document.createElement("a")
+            );
+           a.download = "newfile.html";
+           a.href = "data:text/html," + document.getElementById("content").innerHTML;
+           a.click(); //Trigger a click on the element
+        }
+    </script>
+
+{% endblock %}

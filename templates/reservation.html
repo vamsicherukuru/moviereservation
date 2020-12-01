@@ -5,6 +5,11 @@
 
 <style>
 
+
+
+
+
+
     @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
     * {
@@ -12,8 +17,7 @@
     }
     
     body {
-      background-color: #242333;
-      color: #fff;
+      color: black;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -46,9 +50,10 @@
     
     .seat {
       background-color: #444451;
-      height: 12px;
-      width: 15px;
-      margin: 3px;
+      height: 20px;
+      width: 25px;
+      margin: 30px;
+     
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -126,161 +131,84 @@
 
 
 
-
 </style>
 
-
-
-
 <center>
-    <div style="margin:50px">
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div style="margin:50px; background:white;">
      {% if booked %}
-
-     <a type="submit" href="{% url 'bookings:payment' %}" class="btn btn-success" name="">Go to payment</a>
+     <br><br>
+<h5>Pay online or Cash on Delivery?</h5>
+     <a type="submit" href="{% url 'bookings:payment' %}" class="btn btn-success" name="">Pay online</a>
+     <a type="submit" href="{% url 'bookings:home' %}" class="btn btn-success" name="">Cash on delivery</a>
+     <br><br>
   
  {% else %}
  
- <center>
+ 
+<script>
+  alert("Please Note the name of product while ordering !");
+</script>
      <div>
-         <center><h1 style="color: white;">book and grab your tickets now</h1></center>
+         <center><h1 style="color: grey;">Payment gateway</h1></center>
          <form method="POST" enctype="multipart/form-data">
              {% csrf_token %}
-             {{ticket_form.movie}}
-             {{ticket_form.show_timing}}
-             {{ticket_form.seat}}
-             {{ticket_form.user}}
 
+            <p>Order item</p>
+             {{ticket_form.movie}} <br>
              
-             <button type="submit" class="btn btn-success" name="">Submit</button>
+             {{ticket_form.user}} <br>
+          
+
+             <table>
+               <thead>
+                 <th>Order Details</th>
+                 <th></th>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>Customer name:</td>
+                   <td>{{user.username}}</td>
+                 </tr>
+                 <tr>
+                  <td>Gender:</td>
+                  <td>{{user.userprofile.gender}}</td>
+                </tr>
+                <tr>
+                  <td>Age:</td>
+                  <td>{{user.userprofile.age}}</td>
+                </tr>
+                <tr>
+                  <td><b>Mobile Number</b>:</td>
+                  <td>{{user.userprofile.mobilenumber}}</td>
+                </tr>
+               
+                <tr>
+                  <td><b>Delivery location</b>:</td>
+                  <td>{{user.userprofile.Location}}</td>
+                </tr>
+               </tbody>
+             </table>
+
+
+<br>
+             
+             <button type="submit" style="border-radius: 0%;" class="btn btn-warning" name="">Place order</button>
              </form>
+             <br><br>
      </div>
-         
- </center>
+
  {% endif %}
     </div>
 
 
 
-    <br>
+    
 
 
 
 
 
-
-
-    <div class="container">
-        <div class="screen"></div>
-  
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-        </div>
-  
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-        </div>
-  
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-        </div>
-  
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-        </div>
-  
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-        </div>
-  
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-          <div class="seat"></div>
-        </div>
-      </div>
-  
-      <p class="text">
-        You have selected <span id="count">0</span> seats for a price of $<span
-          id="price"
-          >0</span
-        >
-      </p>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
- 
-
-
-
-
- </center>
 
 
 {% endblock %}

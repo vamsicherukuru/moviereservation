@@ -5,31 +5,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shopping</title>
 
 
 
 <style>
   body{
-    background-color:#111920;
-    
-    
-    
+    background-color:rgb(235, 229, 229);
   }
-
+ td,th{
+   padding:5px;
+   width:250px;
+   text-align: center;
+ }
 </style>
 </head>
 <body>
     
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " style="">
+  <nav class="navbar navbar-expand-lg navbar-light  fixed-top " style="background:black;">
     <a class="navbar-brand" href="{% url 'bookings:home' %}" style="font-size: 1.5em;margin-left:20px;margin-right:50px;">
      <div >
       
-      <b>
+      <b style="color: white;">
         
-        <img src="{% static 'images/play2.png' %}" style="width:50px;" alt="">
-        movie bucket
-
+        
+        Shopping
 
       </b>
      </div>
@@ -40,31 +40,41 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav" style="">
-        <a class="nav-item nav-link active" style="margin-left: px;" href="{% url 'bookings:home' %}"><b>Home</b> <span class="sr-only">(current)</span></a>
-       
+        <a class="nav-item nav-link active" style="margin-left: px;color:white;" href="{% url 'bookings:home' %}"><b>Home</b> <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" style="margin-left: px;" href="{% url 'bookings:home' %}"><b></b> <span class="sr-only">(current)</span></a>
+
         <input class="" 
-        style="background:rgba(0,0,0,0.0); border:1px solid grey; height:37px; color:white;
-        border-radius:5px;margin-left: 500px; padding:5px;
+        style="background:white; border:1px solid grey; height:45px; color:black;
+        border-radius:5px;margin-left: 0px;margin-right:100px; padding:5px; width:600px;
         "
         
         type="search" placeholder="Search" aria-label="Search">
+        <img src="{% static 'images/serco.png' %}" style="width:39px; background:rgb(245, 180, 59);border-radius:5px; height:42px; margin-left:-100px;" alt="">
+
 
         {% if user.is_authenticated %}
-        <a class="nav-item nav-link"  style="margin-left: px;" href="{% url 'bookings:logout' %}"><b>Logout</b></a>
-        
+        <a class="nav-item nav-link"  style="margin-left: px;color:white;" href="#"><b><span style="font-size: 12px;;">Shopping pay </span> <br> Balance:{{user.userprofile.balance}}rs</b></a>
+
         {% if user.is_superuser %}
         <a type='button'  class="nav-item nav-link" href="{% url 'bookings:profile' %}">
    
             <img src="{{user.userprofile.profilePic.url}}" width="30px;" height="30px;" style="border-radius:50%;" alt="">
             {{user.username}}
+            <br>        <a class="nav-item nav-link"  style="margin-left: px;color:white;" href="{% url 'bookings:logout' %}"><b>Logout</b></a>
+
         
     </a>
 
           {% else %}
-          <a type='button'  class="nav-item nav-link" href="#">
+          <a type='button'  class="nav-item nav-link" href="{% url 'bookings:profile' %}">
    
             <img src="{{user.userprofile.profilePic.url}}" width="30px;" height="30px;" style="border-radius:50%;" alt="">
-            {{user.username}}
+            <span style="color: white;">Hello, {{user.username}}
+              
+
+              <br>        <a class="nav-item nav-link"  style="margin-left: px;color:white;" href="{% url 'bookings:logout' %}"><b>Logout</b></a>
+
+            </span>
         
     </a>
 
@@ -75,16 +85,23 @@
 
 
         {% else %}
-        <a class="nav-item nav-link" style="#cccccc
-        " href="{% url 'bookings:user_login' %}"><b>Login</b></a>
-        <a class="nav-item nav-link" style="#cccccc
+        <a class="nav-item nav-link" style="#cccccc;color:white; font-size:12px;
+        " href="{% url 'bookings:user_login' %}">Hello, User <b><br><span style="font-size: 14px;">Login now</span></b></a>
+        <a class="nav-item nav-link" style="#cccccc;color:white;
         " href="{% url 'bookings:register' %}"><b>sign up</b></a>
         {% endif %}
       </div>
+<div>
+  
+</div>
+      
     </div>
+    
   </nav>
 
+  
 
+  
 
   <br><br> <br>
   
@@ -94,7 +111,124 @@
 
   {% endblock %}
 
+<footer>
+  <div style="background-color: rgb(32, 32, 61); ">
 
+    <center><h6 style="color: white; padding:10px;">
+      Back to top
+    </h6></center>
+
+  </div>
+
+
+  <div style="background-color: rgb(16, 16, 43);color:darkgray; margin-top:-8px;">
+   <center>
+    <table  style="border:none;">
+      <thead style="color: white;">
+        <th>Get to know us</th>
+        <th>Connect with us</th>
+        <th>Make money with us</th>
+        <th>Let us help you</th>
+      </thead>
+     <tbody>
+      <tr>
+        <td>About Us</td>
+        <td>Facebook</td>
+        <td>Sell on shopping</td>
+        <td>Covid-19 and Shopping</td>
+      </tr>
+      <tr>
+        <td>About Us</td>
+        <td>Facebook</td>
+        <td>Sell on shopping</td>
+        <td>Covid-19 and Shopping</td>
+      </tr>
+      <tr>
+        <td>About Us</td>
+        <td>Facebook</td>
+        <td>Sell on shopping</td>
+        <td>Covid-19 and Shopping</td>
+      </tr>
+      <tr>
+        <td>About Us</td>
+        <td>Facebook</td>
+        <td>Sell on shopping</td>
+        <td>Covid-19 and Shopping</td>
+      </tr>
+      <tr>
+        <td>About Us</td>
+        <td>Facebook</td>
+        <td>Sell on shopping</td>
+        <td>Covid-19 and Shopping</td>
+      </tr>
+     </tbody>
+    </table>
+    
+
+   </center>
+
+   <hr style="background-color:grey ; width:1200px">
+<div>
+ <center>
+
+    
+  <b style="color: white;">
+        
+        
+  <h5>  <b>
+    Shopping
+  </b></h5>
+
+  </b>
+
+
+<br>
+  <thead>
+
+    <th>Australia</th>
+    <th>Brazil</th>
+    <th>Canada</th>
+    
+    <th>United States</th>
+    <th>Germany</th>
+    <th>France</th>
+    
+    <th>India</th>
+    <th>South Africa</th>
+    <th>Netherlands</th>
+    
+    <th>Australia</th>
+    <th>Brazil</th>
+    <th>Canada</th>
+    
+    <th>Australia</th>
+    <th>Brazil</th>
+    <th>Canada</th>
+
+
+  </thead>
+
+ </center>
+</div>
+
+
+<br><br>
+
+  </div>
+
+<center>
+  <div style="background-color: rgb(8, 3, 29); padding:10px;"> 
+    <h6 style="color: grey;">
+      Conditions of Use & Sale &nbsp; Privacy Notice &nbsp; Interest-Based Ads
+      
+      &nbsp;&nbsp;
+      
+      © 1996-2020, Shopping.com, Inc. or its affiliates
+    </h6>
+  </div>
+</center>
+
+</footer>
 
 </body>
 </html>

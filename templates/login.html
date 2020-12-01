@@ -1,6 +1,9 @@
-{% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <style>
 
@@ -12,17 +15,20 @@
         
     }
     body{
-        background-color: black;
+        background-color:;
     }
 </style>
-
+<center><h1 style="color: black; margin-top:70px;">
+    <b>shopping.in</b><br>
+</h1></center>
 
 <center>
+    
 
-    <div style="margin-top:100px;background-image:linear-gradient(to bottom,rgba(0,0,0.1),rgba(255,255,255,0.2));width:500px;" >
+    <div style="margin-top:10px;background-image:linear-gradient(to bottom,rgba(0,0,0.1),rgba(255,255,255,0.2));width:500px;" >
 
 
-        <h3 style="color: white;">movie bucket</h3>
+     
 
         <form method="POST" action="{% url 'bookings:user_login' %}">
     
@@ -38,6 +44,10 @@
         </form>
         
     </div>
-    
+    <p>
+        Not a registered user? 
+    </p>
+    <a href="{% url 'bookings:register' %}" style="margin-top: 15px; margin-bottom:15px;">register now</a>
+
 </center>
 {% endblock %}

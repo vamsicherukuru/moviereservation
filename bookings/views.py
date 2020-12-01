@@ -8,24 +8,62 @@ from django.contrib.auth  import authenticate,login,logout
 from django.http import HttpResponseRedirect,HttpResponse
 from django.urls import reverse,reverse_lazy
 from django.contrib.auth.decorators import login_required
-
+import csv
 from random import shuffle
+
 # Create your views here.
 
 
 
 class Home(ListView):
     template_name = 'home.html'
-    model = models.Movie
+    model = models.Product
     
     context_object_name = 'movie'
-    queryset = models.Movie.objects.order_by('-id')
+    queryset = models.Product.objects.order_by('-id')
+
+
+
+
+
+class suitcasesHome(ListView):
+    template_name = 'suitcase.html'
+    model = models.Product
+    
+    context_object_name = 'movie'
+    queryset = models.Product.objects.order_by('-id').reverse()
+
+class strawHome(ListView):
+    template_name = 'strawhome.html'
+    model = models.Product
+    
+    context_object_name = 'movie'
+    queryset = models.Product.objects.order_by('-id').reverse()
+
+class platesHome(ListView):
+    template_name = 'plateshome.html'
+    model = models.Product
+    
+    context_object_name = 'movie'
+    queryset = models.Product.objects.order_by('-id').reverse()
+
+    
+
+
    
 
 
+class product_details(DetailView):
+    template_name = 'product_details.html'
+    model = models.Product
+    
+    context_object_name = 'movie'
+    
+    
+
 class Seat(DetailView):
     template_name = 'seats.html'
-    model = models.Movie
+    model = models.Product
     
     context_object_name = 'movie'
 
@@ -102,12 +140,14 @@ def ReservationView(request):
     current_user = request.user.username
     if request.method == 'POST':
         ticket_form = TicketForm(request.POST)
-       
+        
         
         if ticket_form.is_valid():
             ticket = ticket_form.save(commit=False)
-           
             ticket.user = request.user.username
+            ticket.age = request.user.userprofile.age
+            ticket.income = request.user.userprofile.income
+            ticket.gender = request.user.userprofile.gender
             ticket.save()
             booked = True
         else:
@@ -165,6 +205,25 @@ def PaymentView(request):
     return render(request,'payment.html',{'payment_form':payment_form
         , 'payed':payed,'cu':current_user
         })
-        
 
 
+
+
+
+
+# export Data from Database to excel sheets
+
+
+def export(request):
+    response = HttpResponse(content_type='text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['Product Name','Customer Name','Customer Age','Gender','Product Column','Ordered On','income'])
+
+
+    for i in models.Ticket.objects.all().values_list('movie__name','user','age','gender','movie__column_number','post_date','income'):
+        writer.writerow(i)
+
+    response['Content-Disposition'] = 'attachment; filename="purchase_report.csv"'
+
+
+    return response

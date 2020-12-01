@@ -6,7 +6,7 @@
   .container {
     position: relative;
     text-align: center;
-    color: white;
+    color: rgb(255, 254, 254);
   }
   ::-webkit-scrollbar {
     display: none;
@@ -48,7 +48,6 @@
     overflow: auto;
     white-space: nowrap;
   }
-  
   div.scrollmenu a {
     display: inline-block;
     color: white;
@@ -56,11 +55,16 @@
     
     text-decoration: none;
   }
+  div.scrollmenu p {
+    width: ;
+    color: black;
+    
+  }
   
   div.scrollmenu a:hover {
     
-   border:2px solid grey;
-    padding: 5px;
+   border:1px solid rgb(146, 134, 134);
+    
     
     
   }
@@ -72,174 +76,143 @@
     background-attachment: fixed;
     animation-name: bannerani;
     animation-iteration-count: infinite;
-    animation-duration: 10s;
+    animation-duration: 25s;
 }
 @keyframes bannerani {
 
     25%{
-      content:url("{% static 'images/avengers1.webp' %}");
+      content:url("{% static 'images/f1.png' %}");
      
     }
     50%{
-      content:url("{% static 'images/alavai.jpg' %}");
+      content:url("{% static 'images/f2.jpg' %}");
     }
    
 
     75%{
-            content: url("{% static 'images/darbar.jpg' %}");
+            content: url("{% static 'images/f1.png' %}");
         }
 }
 
 
 </style>
+<nav class="navbar navbar-expand-lg navbar-dark "  style="margin-top:-2px;background:rgb(1, 33, 59) ;font-weight:bold;">
+  <img src="{% static 'images/loco.png' %}" style="width:15px;" alt="">
 
+  <a class="navbar-link" href="#" style="color: white;margin-left:5px;">
 
-<img class="d-block w-100" id="banner" src="{% static 'images/inter.jpg' %}" height="400px;" alt="First slide">
-
-
- <div  style="width: 1200px; margin-left:30px;">
-     
-
+   <span style="font-size: 12px;"> Deliver to</span>
+    {% if user.is_authenticated %}
+    {{user.username}}
 <br>
+{{user.userprofile.Location}}
+{% endif %}
 
-<h5 style="text-align:left; margin-left:14px; margin-bottom:-10px;color:white;"><b>New releases</b></h5>
-
-<div class="scrollmenu" style=" padding:20px;">
-  
-  {% for i in movie %}
-
-
-  <a href="{% url 'bookings:seats' pk=i.pk %}" >
- 
-      <div  style="width:18rem; height:10rem; border-radius: 5px;">
-        <img src="{{i.thumbnail.url}}" alt="Snow" style="width:18rem; height:10rem; border-radius: 5px;">
-        <br><span style="font-family:arial; color:silver;"><b>{{i.name}} </b> </span>   
-
-      </div>
   </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mobiles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Laptops</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Customer service</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'bookings:profile' %}">My orders</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 
-{% endfor %}
+<img class="d-block w-100" id="banner" src="{% static 'images/f2.jpg' %}" height="400px;" style="margin-top: -50px;" alt="First slide">
+
+
+<div class="btn-warning" style="width: 300px;">
+  
+  <center>
+    <h2 style="color: white;">OFFER ALERT</h2>
+    <h3>FLAT 2000 off Suitcases </h3>
+  
+  </center>
+ 
 </div>
+
+<center>
+
+
+
+  <div style="margin:15px;">
+
+    <table>
+      <thead>
+  
+        <th>
+          <a href="{% url 'bookings:straw' %}" style="color: black; text-decoration:none;">
+          <div class="card" style="width: 18rem;height:25em;">
+
+<center>            <img class="card-img-top" src="{% static 'images/strawsCover.jpg' %}" style="width:200px;" alt="Card image cap">
+</center>  
+            <div class="card-body">
+              <h5 class="card-title">Straws</h5>
+              <p class="card-text">High Quality Straws At Great Prices</p>
+              <a href="{% url 'bookings:straw' %}" class="btn btn-warning">Show more</a>
+            </div>
+          </div>
+        </a>
+        </th>
+        <th>
+    <a href="{% url 'bookings:plates' %}" style="color: black; text-decoration:none;">
+
+      <div class="card" style="width: 18rem;height:25em;">
+        <center>            <img class="card-img-top" src="{% static 'images/platesCover.jpg' %}" style="width:200px;" alt="Card image cap">
+        </center>            <div class="card-body">
+          <h5 class="card-title">Plates</h5>
+          <p class="card-text">High Quality Plates At Great Prices</p>
+          <a href="{% url 'bookings:plates' %}" class="btn btn-warning">Show more</a>
+        </div>
+      </div>
+    </a>
+        </th>
+        <th>
+          <a href="{% url 'bookings:suitcases' %}" style="color: black; text-decoration:none;">
+
+          <div class="card" style="width: 18rem;height:25em;">
+            <center>            <img class="card-img-top" src="{% static 'images/suitCover.jpg' %}" style="height:12em; width:10em;" alt="Card image cap">
+            </center>
+                      <div class="card-body">
+              <h5 class="card-title">Suitcases</h5>
+              <p class="card-text">High Quality Suitcases At Great Prices  </p>
+              <a href="{% url 'bookings:suitcases' %}" class="btn btn-warning">Show more</a>
+            </div>
+          </div>
+          </a>
+        </th>
+  
+      </thead>
+    </table>
+  
+  </div>
+
+
+
+</center>
 
  </div>
 
 
 
 
-
-
-
- <div  style="width: 1200px; margin-left:30px;">
-     
-
  
-  <h5 style="text-align:left; margin-left:14px; margin-bottom:-10px;color:white;"><b>Telugu</b></h5>
-  
-  <div class="scrollmenu" style=" padding:20px;">
-    
-    {% for i in movie %}
-    {% if i.language == 'Telugu' %}
-  
-    <a href="{% url 'bookings:seats' pk=i.pk %}" >
-   
-        <div  style="width:18rem; height:10rem; border-radius: 5px;">
-          <img src="{{i.thumbnail.url}}" alt="Snow" style="width:18rem; height:10rem; border-radius: 5px;">
-          <br><span style="font-family:arial;"><b>{{i.name}} </b> </span>   
-  
-        </div>
-    </a>
-  {% endif %}
-  
-  {% endfor %}
-  </div>
-  
-   </div>
-
-   
-
-   <div  style="width: 1200px; margin-left:30px;">
-     
-
-    
-    
-    <h5 style="text-align:left; margin-left:14px; margin-bottom:-10px;color:white;"><b>Hindi</b></h5>
-    
-    <div class="scrollmenu" style=" padding:20px;">
-      
-      {% for i in movie %}
-      {% if i.language == 'Hindi' %}
-    
-      <a href="{% url 'bookings:seats' pk=i.pk %}" >
-     
-          <div  style="width:18rem; height:10rem; border-radius: 5px;">
-            <img src="{{i.thumbnail.url}}" alt="Snow" style="width:18rem; height:10rem; border-radius: 5px;">
-            <br><span style="font-family:arial;"><b>{{i.name}} </b> </span>   
-    
-          </div>
-      </a>
-    {% endif %}
-    
-    {% endfor %}
-    </div>
-    
-     </div>
-
-     
-     <div  style="width: 1200px; margin-left:30px;">
-     
-
-      
-      
-      <h5 style="text-align:left; margin-left:14px; margin-bottom:-10px;color:white;"><b>Tamil</b></h5>
-      
-      <div class="scrollmenu" style=" padding:20px;">
-        
-        {% for i in movie %}
-      
-      
-        <a href="{% url 'bookings:seats' pk=i.pk %}" >
-       
-            <div  style="width:18rem; height:10rem; border-radius: 5px;">
-              <img src="{{i.thumbnail.url}}" alt="Snow" style="width:18rem; height:10rem; border-radius: 5px;">
-              <br><span style="font-family:arial;"><b>{{i.name}} </b> </span>   
-      
-            </div>
-        </a>
-      
-      
-      {% endfor %}
-      </div>
-      
-       </div>
-
-       
-       <div  style="width: 1200px; margin-left:30px;">
-     
-
-        
-        
-        <h5 style="text-align:left; margin-left:14px; margin-bottom:-10px;color:white;"><b>Malayalam</b></h5>
-        
-        <div class="scrollmenu" style=" padding:20px;">
-          
-          {% for i in movie %}
-          {% if i.language == 'Malayalam' %}
-        
-          <a href="{% url 'bookings:seats' pk=i.pk %}" >
-         
-              <div  style="width:18rem; height:10rem; border-radius: 5px;">
-                <img src="{{i.thumbnail.url}}" alt="Snow" style="width:18rem; height:10rem; border-radius: 5px;">
-                <br><span style="font-family:arial;"><b>{{i.name}} </b> </span>   
-        
-              </div>
-          </a>
-        
-        {% endif %}
-        {% endfor %}
-        </div>
-        
-         </div>
-        
 
 {% endblock %}

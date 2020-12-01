@@ -37,7 +37,7 @@ input[name='cvv']{
 
 
     {% if payed %}
-    <h1>Collect your tickets in your profile</h1>
+    <h1>Check the order status in My orders</h1>
 
  {% else %}
     <div style="background-color: white; margin-left:300px; padding:10px;  width:600px; border:2px solid grey; border-radius:5px; font-family:Arial;">
@@ -47,8 +47,8 @@ input[name='cvv']{
       
             <b>
               
-              <img src="{% static 'images/play2.png' %}" style="width:40px;" alt="">
-              movie bucket
+              <img src="{% static 'images/arrow.png' %}" style="width:100px; margin-right:-100px; margin-bottom:-30px;" alt="">
+              shopping
       
       
             </b>
@@ -57,7 +57,7 @@ input[name='cvv']{
 
 
        </center>
-        <form action="" method="POST">
+        <form  method="POST">
 
             {% csrf_token %}
                 <label for="card_number" style="margin-left: 10px;">Card Number</label>
@@ -74,9 +74,7 @@ input[name='cvv']{
             {{payment_form.cvv}}   
             
             {{payment_form.CardHolder_name}} <br>
-            <label for="amount" style="margin-left: 10px;">Amount</label> <br>
-            {{payment_form.amount}} <br>
-
+          
             <input type="submit" name="" id="">
 
         </form>

@@ -6,78 +6,84 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 from django.contrib import auth
 from multiselectfield import MultiSelectField
+from django.utils import timezone
+from datetime import datetime
 # Create your models here.
 
 
 
-class Movie(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=100,default='')
     poster = models.ImageField(upload_to = 'movie_posters',blank=True)
-    thumbnail = models.ImageField(upload_to = 'thumbnails', null=True)
-    director = models.CharField(max_length=100,default='')
-    starring = models.CharField(max_length=100,default='')
-    genres = models.CharField(max_length=100,default='')
+   
     description = models.CharField(max_length=1000,default='')
-    trailer = models.FileField(upload_to='trailer_videos',null=True)
     basic_price = models.IntegerField(default=100)
     
     language_CHOICES = [
-    ('Telugu', 'Telugu'),
-    ('Hindi', 'Hindi'),
-    ('Malayalam', 'Malayalam'),
-    ('Tamil', 'Tamil'),
-    ('English', 'English'),
+    ('Suitcase', 'Suitcase'),
+    ('Straws', 'Straws'),
+    ('Plates', 'Plates'),
+   
+    ]
+    column_CHOICES = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+   
     ]
 
-    language = models.CharField(choices = language_CHOICES,max_length=100, default='')
+
+    Type = models.CharField(choices = language_CHOICES,max_length=100, default='')
+    column_number = models.CharField(choices = column_CHOICES,max_length=100, default='')
+
    
     def __str__(self):
         return self.name
 
 
 
+
+
+
 class UserProfile(models.Model):
 
     user = models.OneToOneField(User,on_delete=models.CASCADE)
- 
     #add_any additional
-    Bio = models.CharField(max_length=100,default='')
+    Location = models.CharField(max_length=100,default='')
+    balance = models.IntegerField(default=5000)
+    age = models.IntegerField(default='')
+    mobilenumber = models.IntegerField(default='')
+
+    gender = models.CharField(max_length=1,default='M')
+    column_CHOICES = [
+    ('10,00,000', '10,00,000'),
+    ('5,00,000', '5,00,000'),
+    ('Below 5 Lakh', 'Below 5 Lakh'),
+   
+    ]
+    income = models.CharField(choices = column_CHOICES,max_length=100, default='')
+ 
+
     profilePic = models.ImageField(upload_to = 'profile_pics',blank=True)
 
     def __str__(self):
         return self.user.username
 
 class Ticket(models.Model):
-    movie = models.ForeignKey(Movie,on_delete=models.CASCADE)
+    movie = models.ForeignKey(Product,on_delete=models.CASCADE)
     user = models.CharField(max_length=100,null=False)
+    income = models.CharField(max_length=100,null=True)
+    age = models.CharField(max_length=100,null=False)
+    gender = models.CharField(max_length=100,null=False)
+    post_date = models.DateTimeField(default=datetime.now)
 
-   
-
-    SHOW_CHOICES = [
-    ('8:30 AM', '8:30 AM'),
-    ('11:30 AM', '11:30 AM'),
-    ('2:30 PM', '2:30 PM'),
-    ('6:30 PM', '6:30 PM'),
-    ('9:30 PM', '9:30 PM'),
-    ]
-
-    seat = models.CharField(max_length=100)
-    show_timing = models.CharField(choices = SHOW_CHOICES,max_length=100,default = '6:30 PM')
-    
-    
-    
-    
-    class Meta:
-        unique_together = ['movie','seat','show_timing']
 
 
     def __str__(self):
-        return self.movie.name + " " + "(" + self.seat + ")" + "(" + self.show_timing + ")" + self.user
+        return self.movie.name + " - " + self.user +"-" +self.age +" - " +self.gender + " -" + self.movie.column_number
     
 
 
-class Theatre(models.Model):
-    Theatre_name = models.CharField(max_length=255,default="")
 
 
 
@@ -87,7 +93,6 @@ class Payment(models.Model):
     card_number = models.IntegerField(default='')
     cvv = models.IntegerField(default='')
     CardHolder_name =  models.CharField(max_length=100)
-    amount = models.IntegerField(default='')
 
     def __str__(self):
-        return self.user + " "  + str(self.amount) + " " + self.CardHolder_name
+        return self.user + " "  + " " + self.CardHolder_name

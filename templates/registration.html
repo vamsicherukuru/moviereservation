@@ -1,16 +1,20 @@
-{% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
 
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+</head>
 <style>
 
     input{
        
         width: 400px;
-        border-radius: 2px;
+        border-radius: 10px;
         height: 40px;
+        margin: 10px;
     }
+  
     p{
         color: white;
     }
@@ -21,19 +25,31 @@
 <center>
    <div style="margin:50px">
     {% if registered %}
-    <h1>Thank you</h1>
+    <h1 style="color: black;">Thank you for signing up <br> 500 Rs Credited</h1>
+
+    <a href="{% url 'bookings:user_login' %}">Back to Home Page</a>
  
 {% else %}
-
+<center><h1 style="color: black;">
+    <b>shopping.in</b><br>
+</h1></center>
 <center>
-    <div>
-        <center><h1 style="color: white;">Sign up and grab your tickets now</h1></center>
+    <div style="border:1px solid black; width:500px;padding-top:50px;">
+        
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+            {{user_form.email}} <br>
             {{user_form.username}}<br>
                 {{user_form.password}} <br>
-                {{profile_pic_form.profilePic}}  <br>
-            
+                
+                <label for="profilePic"><b>Upload profile picture</b> </label>  {{profile_pic_form.profilePic}}  <br>
+                {{profile_pic_form.Location}}
+                {{profile_pic_form.address}}
+                {{profile_pic_form.mobilenumber}}
+                {{profile_pic_form.age}}
+                <label for="income">Yearly Income</label>
+                : {{profile_pic_form.income}}
+                {{profile_pic_form.gender}}
             <button type="submit" class="btn btn-success" name="">Submit</button>
             </form>
     </div>

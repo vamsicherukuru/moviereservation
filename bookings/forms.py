@@ -6,42 +6,36 @@ from django.forms import ModelForm
 from . import views
 
 class UserProfileForm(forms.ModelForm):
+    Location = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Location'}),label="search")
+    age = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Age'}),label="search")
+    gender = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Gender'}),label="search")
+    mobilenumber = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Mobile number'}),label="search")
+
     class Meta():
         model = UserProfile
-        fields = ('profilePic',)
+        fields = ('profilePic','Location','age','gender','mobilenumber','income')
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}),label="search")
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),label="search")
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email-id'}),label="search")
     class Meta():
         model = User
-        fields = ('username','password')
+        fields = ('username','password','email')
 
 
 
 class TicketForm(forms.ModelForm):
    
   
-    BOOL_CHOICES = [
-    ('A1', 'A1'),
-    ('A2', 'A2'),
-    ('A3', 'A3'),
-    ('A4', 'A4'),
-    ('A5', 'A5'),]      
-    
-   
 #     user = forms.CharField(initial="",widget=forms.TextInput(attrs={'readonly':'readonly'})
 # )
-    seat= forms.MultipleChoiceField( choices = BOOL_CHOICES,widget=forms.CheckboxSelectMultiple())
+    
 
-    def clean_seat(self):
-        value = self.cleaned_data['seat']
-        if len(value) > 3:
-            raise forms.ValidationError("You can't select more than 3 items.")
-        return value
-   
+
     class Meta():
         model = Ticket
         fields = '__all__'
-        exclude = ('user',)
+        exclude = ('user','age','gender','post_date','income')
 
 class PaymentForm(forms.ModelForm):
    
